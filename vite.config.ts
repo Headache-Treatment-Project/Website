@@ -4,7 +4,7 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/Website/', // ⚠️ 這裡一定要是你的 repo 名稱
+  base: '/Website/', // ⚠️ 這裡必須是你的 GitHub 專案名稱
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
     alias: {
@@ -53,7 +53,7 @@ export default defineConfig({
   },
   build: {
     target: 'esnext',
-    outDir: 'dist', // ✅ 改成 dist 讓 GitHub Pages 能找到輸出檔案
+    outDir: 'dist', // ✅ GitHub Pages 部署輸出資料夾
   },
   server: {
     port: 3000,
