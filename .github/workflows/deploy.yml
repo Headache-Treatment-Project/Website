@@ -23,12 +23,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: 'npm'
+          node-version: 20      # ← 移除 cache
 
       - name: Install dependencies
-        run: |
-          npm ci || npm install
+        run: npm ci || npm install
 
       - name: Build project
         run: npm run build
@@ -36,7 +34,7 @@ jobs:
       - name: Upload build output
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist   # ✅ 改成 dist（Vite 預設輸出資料夾）
+          path: ./dist
 
   deploy:
     runs-on: ubuntu-latest
