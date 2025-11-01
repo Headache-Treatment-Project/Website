@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  # PostgreSQL 資料庫
+  postgres:
+    image: postgres:15-alpine
+    container_name: migraine-postgres
+    environment:
+      POSTGRES_DB: migraine_care
+      POSTGRES_USER: migraine_user
+      POSTGRES_PASSWORD: migraine_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./src/main/resources/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+    networks:
+      - migraine-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U migraine_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Spring Boot 應用
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: migraine-backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/migraine_care
+      SPRING_DATASOURCE_USERNAME: migraine_user
+      SPRING_DATASOURCE_PASSWORD: migraine_password
+      JWT_SECRET: your-production-secret-key-change-this-min-256-bits
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - migraine-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+networks:
+  migraine-network:
+    driver: bridge
