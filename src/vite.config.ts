@@ -6,8 +6,8 @@ import path from 'path';
 export default defineConfig({
   plugins: [react()],
   
-  // GitHub Pages 部署設定 - 重要！
-  base: '/migraine-care-system/', // 改成您的 GitHub repository 名稱
+  // GitHub Pages 部署設定 - 改成您的 repository 名稱
+  base: '/Website/', // ⚠️ 請改為您的實際 repository 名稱
   
   resolve: {
     alias: {

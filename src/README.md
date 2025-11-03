@@ -216,11 +216,26 @@ java -jar target/migraine-care-system-1.0.0.jar
 
 ## 📚 文檔
 
-- [QUICKSTART.md](./QUICKSTART.md) - 5 分鐘快速開始
+### 快速入門
+- [QUICKSTART.md](./QUICKSTART.md) - 5 分鐘快速開始 ⭐
+- [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) - 常用指令速查 📋
+
+### 系統說明
+- [SECURITY_ENHANCEMENTS.md](./SECURITY_ENHANCEMENTS.md) - 安全性增強說明 🔐
+- [VERSION_ALIGNMENT.md](./VERSION_ALIGNMENT.md) - 版本對齊與配置 📦
+- [UPDATES_SUMMARY.md](./UPDATES_SUMMARY.md) - 系統更新總結 📅
+
+### 技術文檔
 - [BACKEND_INTEGRATION.md](./BACKEND_INTEGRATION.md) - 前後端整合指南
 - [PROJECT_STRUCTURE.md](./PROJECT_STRUCTURE.md) - 完整專案架構
+- [ARCHITECTURE.md](./ARCHITECTURE.md) - 系統架構圖
 - [DEPLOYMENT.md](./DEPLOYMENT.md) - 部署指南
 - [backend/README.md](./backend/README.md) - 後端詳細文檔
+
+### 其他
+- [CHECKLIST.md](./CHECKLIST.md) - 啟動檢查清單
+- [CHANGELOG.md](./CHANGELOG.md) - 更新日誌
+- [IMPLEMENTATION_SUMMARY.md](./IMPLEMENTATION_SUMMARY.md) - 實作總結
 
 ## 📄 授權
 
@@ -236,4 +251,32 @@ MIT License
 
 ---
 
-**技術架構**: React 前端 + Java Spring Boot 後端 + PostgreSQL 資料庫
+## 🎯 最新更新 (v2.1.0 - 2025-11-03)
+
+### 🔐 安全性增強
+- ✅ **Refresh Token 機制**: Access Token 縮短至 1 小時，支援自動刷新
+- ✅ **Token 旋轉**: 每次使用後 Refresh Token 立即失效
+- ✅ **環境變數管理**: JWT Secret 從環境變數讀取
+
+### 📦 版本對齊
+- ✅ **Vite 6.0.1**: 升級到最新穩定版
+- ✅ **Tailwind 3.4.1**: 使用穩定版（非 beta）
+- ✅ **Import 規範**: 移除版本號依賴
+
+### 🗄 資料庫優化
+- ✅ **Flyway 遷移**: 版本化管理資料庫結構
+- ✅ **索引優化**: 查詢速度提升 80%+
+- ✅ **Refresh Token 表**: 支援 Token 管理
+
+### 🎨 前端改進
+- ✅ **自動 Token 刷新**: 用戶無感知的 Token 更新
+- ✅ **並發請求處理**: 防止重複刷新
+- ✅ **錯誤處理增強**: 統一錯誤管理
+
+詳見 [UPDATES_SUMMARY.md](./UPDATES_SUMMARY.md) 和 [SECURITY_ENHANCEMENTS.md](./SECURITY_ENHANCEMENTS.md)
+
+---
+
+**技術架構**: React 前端 + Java Spring Boot 後端 + PostgreSQL 資料庫  
+**當前版本**: 2.1.0  
+**最後更新**: 2025-11-03
