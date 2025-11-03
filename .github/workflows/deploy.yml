@@ -3,6 +3,7 @@ name: Deploy Vite site to GitHub Pages
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -23,13 +24,26 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20      # ← 移除 cache
+          node-version: 20
+          cache: 'npm' # 有 package-lock.json 時可加速，沒有也不會壞
 
       - name: Install dependencies
-        run: npm ci || npm install
+        shell: bash
+        run: |
+          if [ -f package-lock.json ]; then
+            echo "Using npm ci (lockfile found)"
+            npm ci
+          else
+            echo "Lockfile not found, using npm install"
+            npm install
+          fi
 
       - name: Build project
         run: npm run build
+
+      # SPA 在 Pages 下直接重新整理會 404，複製 index.html 為 404.html 避免白畫面
+      - name: Copy 404 for SPA
+        run: cp dist/index.html dist/404.html
 
       - name: Upload build output
         uses: actions/upload-pages-artifact@v3
